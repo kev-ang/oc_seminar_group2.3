@@ -113,10 +113,11 @@ function collectResponseDataFromGraphDb(response) {
 	console.log("GraphDB response: " + response)
 	var ret_array = []
 	for (i = 0; i < response.data.results.bindings.length; i++) {
-		if ('purpose' in response.data.results.bindings[i]) {
-			ret_array[i] = response.data.results.bindings[i].purpose.value;
-		}
-		else if ('description' in response.data.results.bindings[i]) {
+		//if ('purpose' in response.data.results.bindings[i]) {
+		//	ret_array[i] = response.data.results.bindings[i].purpose.value;
+		//}
+		//else 
+		if ('description' in response.data.results.bindings[i]) {
 			ret_array[i] = response.data.results.bindings[i].description.value;
 		}
 		else if ('name' in response.data.results.bindings[i]) {
