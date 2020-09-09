@@ -48,27 +48,33 @@ function callGraphDb(req, res) {
 	switch (req.body.queryResult.intent.displayName) {
 		case "What is Type Question": 
 			var parameter = Object.values(req.body.queryResult.parameters)[0];
+			console.log("Extracted parameter for what is question: " + parameter)
 			encoded_query = query_for_what_is_questions(parameter)
 			break;
 		case "Difference Type Question":
 			var first_parameter = Object.values(Object.values(req.body.queryResult.parameters)[0])[0];
 			var second_parameter = Object.values(Object.values(req.body.queryResult.parameters)[0])[1];
+			console.log("Extracted parameters for difference question: " + first_parameter + ", " + second_parameter)
 			encoded_query = query_for_difference_questions(first_parameter, second_parameter);
 			break;
 		case "List Type Questions": 
 			var parameter = Object.values(req.body.queryResult.parameters)[0];
+			console.log("Extracted parameter for list type question: " + parameter)
 			encoded_query = query_for_list_questions(parameter)
 			break;
 		case "Step Type Questions": 
 			var parameter = Object.values(req.body.queryResult.parameters)[0];
+			console.log("Extracted parameter for step type question: " + parameter)
 			encoded_query = query_for_step_questions(parameter)
 			break;
 		case "Example Type Questions": 
 			var parameter = Object.values(req.body.queryResult.parameters)[0];
+			console.log("Extracted parameter for example question: " + parameter)
 			encoded_query = query_for_example_questions(parameter)
 			break;
 		case "Narrower Type Question": 
 			var parameter = Object.values(req.body.queryResult.parameters)[0];
+			console.log("Extracted parameter for narrower question: " + parameter)
 			encoded_query = query_for_narrower_questions(parameter)
 			break;
 		default: {
@@ -78,8 +84,12 @@ function callGraphDb(req, res) {
 			})
 		}
 	}
+	
+	console.log("Resulting SPARQL query: " + encoded_query)
 
 	let url = host_name + encoded_query
+	
+	console.log("URL to call: " + url)
 	
 	axios.get(url,authenticationParams).then(response =>{			
 		var response_value_array = collectResponseDataFromGraphDb(response)
