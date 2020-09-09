@@ -93,8 +93,6 @@ function callGraphDb(req, res) {
 	
 	axios.get(url,authenticationParams).then(response =>{			
 		var response_value_array = collectResponseDataFromGraphDb(response)
-		
-		console.log("GraphDB result: " + response_value_array)
 
 		let response_value = response_validation(req, response_value_array)
 
@@ -112,6 +110,7 @@ function callGraphDb(req, res) {
 }
 
 function collectResponseDataFromGraphDb(response) {
+	console.log("GraphDB response: " + response)
 	var ret_array = []
 	for (i = 0; i < response.data.results.bindings.length; i++) {
 		if ('purpose' in response.data.results.bindings[i]) {
