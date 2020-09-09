@@ -93,6 +93,8 @@ function callGraphDb(req, res) {
 	
 	axios.get(url,authenticationParams).then(response =>{			
 		var response_value_array = collectResponseDataFromGraphDb(response)
+		
+		console.log("GraphDB result: " + response_value_array)
 
 		let response_value = response_validation(req, response_value_array)
 
