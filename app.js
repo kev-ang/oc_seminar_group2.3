@@ -200,23 +200,14 @@ function query_for_difference_questions(first_parameter, second_parameter){
 function query_for_list_questions(parameter){
 	return querystring.stringify({query: `
 		PREFIX schema: <http://schema.org/>
-		PREFIX kgbs: <http://knowledgegraphbook.ai/schema/>
-		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-							
-		select ?description where { 
-			{
-				?Concept schema:name ?name
-				OPTIONAL {?Concept skos:narrower ?specialization.}
-				OPTIONAL {?specialization schema:name ?description.}
-				filter (LCASE(?name) = LCASE("${parameter}")) .
-			}    
-			union 
-			{
-				?Concept schema:alternateName ?name
-				OPTIONAL {?Concept skos:narrower ?specialization.}
-				OPTIONAL {?specialization schema:name ?description.}
-				filter (LCASE(?name) = LCASE("${parameter}")) .
-			}
+		
+		select ?description where {
+		    ?howto a schema:HowTo ;
+		           schema:name ?name .
+		    ?howto schema:step: ?step .
+		    ?step schema:position ?pos ;
+		          schema:text ?description .
+		    filter (LCASE(?name) = LCASE("${parameter}")) .
 		}
 	`});
 }
