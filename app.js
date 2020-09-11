@@ -238,6 +238,7 @@ function query_for_step_questions(parameter){
 
 function query_for_example_questions(parameter) {
 	return querystring.stringify({query: `
+		PREFIX kgbs: <http://knowledgegraphbook.ai/schema/>
 		PREFIX schema: <http://schema.org/>
 		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 		select ?name where { 
