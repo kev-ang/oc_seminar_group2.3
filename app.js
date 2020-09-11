@@ -246,6 +246,7 @@ function query_for_example_questions(parameter) {
   			?concept schema:name ?target .
     			?concept skos:example ?example .
 		    	?example schema:name ?name .
+			filter (LCASE(?target) = LCASE("${parameter}"))
 		}
 	`});
 }
