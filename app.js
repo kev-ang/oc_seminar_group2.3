@@ -240,12 +240,11 @@ function query_for_example_questions(parameter) {
 	return querystring.stringify({query: `
 		PREFIX schema: <http://schema.org/>
 		PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-		select ?name ?description where { 
-				?Concept schema:name ?target.
-				optional { ?Concept skos:example ?example . }
-				optional {?example schema:name ?name . }
-    			optional {?example schema:description ?description . }
-				filter (LCASE(?target) = LCASE("${parameter}"))
+		select ?name where { 
+			?concept a kgbs:Concept .
+  			?concept schema:name ?target .
+    			?concept skos:example ?example .
+		    	?example schema:name ?name .
 		}
 	`});
 }
