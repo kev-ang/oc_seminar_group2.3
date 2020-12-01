@@ -9,8 +9,8 @@ const host_name = "https://graphdb.sti2.at/repositories/knowledgegraphbook?";
 
 const authenticationParams = {
 	auth: {
-		username: 'oc1920',
-		password: 'Oc1920!'
+		username: 'kgbook',
+		password: 'kgbookpw'
 	}
 }
 
