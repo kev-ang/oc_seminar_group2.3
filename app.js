@@ -5,7 +5,7 @@ var port = process.env.PORT || 8080;
 
 const axios = require('axios');
 
-const host_name = "https://graphdb.sti2.at/repositories/OCSS2020?";
+const host_name = "https://graphdb.sti2.at/repositories/knowledgegraphbook?";
 
 const authenticationParams = {
 	auth: {
