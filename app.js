@@ -183,16 +183,16 @@ function query_for_difference_questions(first_parameter, second_parameter){
 		PREFIX kgbs: <http://knowledgegraphbook.ai/schema/>
 		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-					
+		PREFIX kgb: <http://kgbook.ai/>
+
 		select ?description where { 
-			?Concept schema:name ?name.
-    		?relatesTo rdf:type ?type.
-			?type rdfs:label ?labelcheck.
-    		?relatesTo schema:name ?check_name.
-    		?relatesTo schema:description ?description.
-			filter (LCASE(?name) = LCASE("${first_parameter}") || LCASE(?name) = LCASE("${second_parameter}"))
-            filter(?labelcheck = "Difference")
-    		filter (contains (LCASE(?check_name),LCASE("${first_parameter}")) || contains (LCASE(?check_name),LCASE("${second_parameter}")))
+		    ?difference a kgbs:Difference .
+			?difference schema:name ?name.
+		    ?difference kgbs:relatesToConcept ?relatedConcept .
+		    ?difference schema:description ?description .
+		    ?relatedConcept schema:name ?check_name.
+		    filter (contains (LCASE(?name),LCASE("${first_parameter}")) || contains (LCASE(?name),LCASE("${second_parameter}"))) .
+		    filter (LCASE(?check_name) = LCASE("${first_parameter}") || LCASE(?check_name) = LCASE("${second_parameter}")) .
 		}
 	`});
 }
