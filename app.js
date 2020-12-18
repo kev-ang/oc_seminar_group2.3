@@ -147,11 +147,7 @@ function response_validation(req, response_value_array) {
 		case "Narrower Type Question": 
 			return "Tasks can be listed as; " + response_value_array.join(", ")
 		case "Difference Type Question":
-			if (response_value_array[0] == response_value_array[1]) {
-				return response_value_array[0];
-			} else {
-				return "The requested concepts cannot be compared"
-			}
+			return response_value_array[0];
 	}
 }
 
